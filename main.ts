@@ -12,7 +12,7 @@ const delay = (timeout: number) => {
 const printMessage = async (message: string) => {
   for (const c of [...message]) {
     await Deno.stdout.write(new TextEncoder().encode(c));
-    await delay(20);
+    await delay(15);
   }
 };
 
