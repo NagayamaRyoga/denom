@@ -1,0 +1,52 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "npm:zurk": "npm:zurk@0.1.4",
+      "npm:zurk@0.1.4": "npm:zurk@0.1.4",
+      "npm:zx": "npm:zx@8.0.2",
+      "npm:zx@8.0.2": "npm:zx@8.0.2"
+    },
+    "npm": {
+      "@types/fs-extra@11.0.4": {
+        "integrity": "sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==",
+        "dependencies": {
+          "@types/jsonfile": "@types/jsonfile@6.1.4",
+          "@types/node": "@types/node@18.16.19"
+        }
+      },
+      "@types/jsonfile@6.1.4": {
+        "integrity": "sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==",
+        "dependencies": {
+          "@types/node": "@types/node@18.16.19"
+        }
+      },
+      "@types/node@18.16.19": {
+        "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
+        "dependencies": {}
+      },
+      "@types/node@20.12.7": {
+        "integrity": "sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==",
+        "dependencies": {
+          "undici-types": "undici-types@5.26.5"
+        }
+      },
+      "undici-types@5.26.5": {
+        "integrity": "sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==",
+        "dependencies": {}
+      },
+      "zurk@0.1.4": {
+        "integrity": "sha512-sAUhRgP6vqTxVhcjSMlukAZ9l2TJSK3HWOnzAIUYInkuToS07LdAb878xtNc/Dgj7sve43chedsXc/k5ft/WyQ==",
+        "dependencies": {}
+      },
+      "zx@8.0.2": {
+        "integrity": "sha512-3g+ePtPYmyrjRuASlJiUhkje1je4a47woML/fzTKBb9PA5BzRQbSswwyJ8nlFWJjA1ORRi6TMyAdhuz/jK+Gaw==",
+        "dependencies": {
+          "@types/fs-extra": "@types/fs-extra@11.0.4",
+          "@types/node": "@types/node@20.12.7"
+        }
+      }
+    }
+  },
+  "remote": {}
+}
