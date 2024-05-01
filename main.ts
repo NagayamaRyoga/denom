@@ -1,6 +1,8 @@
 import { $, ProcessOutput, ProcessPromise, cd, chalk } from "npm:zx@8.0.2";
 import { buildCmd } from "npm:zurk@0.1.4/spawn";
 
+export { $, chalk } from "npm:zx@8.0.2";
+
 const delay = (timeout: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, timeout);
