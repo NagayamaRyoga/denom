@@ -1,10 +1,10 @@
-import { sh, step } from "./main.ts";
+import { cd, sh, step } from "./main.ts";
 
 await step(sh`echo Hello, denom`, {
   comment: "Print a message",
 });
 
-await step.cd("..", {
+await step(cd(".."), {
   comment: "Move to the parent directory",
 });
 

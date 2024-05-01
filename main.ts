@@ -1,4 +1,10 @@
-import { $, ProcessOutput, ProcessPromise, cd, chalk } from "npm:zx@8.0.2";
+import {
+  $,
+  ProcessOutput,
+  ProcessPromise,
+  cd as $cd,
+  chalk,
+} from "npm:zx@8.0.2";
 import { buildCmd } from "npm:zurk@0.1.4/spawn";
 
 export { $, chalk } from "npm:zx@8.0.2";
@@ -40,12 +46,16 @@ export interface StepOptions {
   autoRun?: boolean;
 }
 
-export interface Step {
-  (cmd: Command, options?: StepOptions): Promise<ProcessOutput>;
-  cd: (dir: string, options?: StepOptions) => Promise<void>;
-}
+export function step(
+  cmd: ShellCommand,
+  options?: StepOptions
+): Promise<ProcessOutput>;
+export function step(cmd: ChdirCommand, options?: StepOptions): Promise<void>;
 
-export const step: Step = async (cmd, { comment, autoRun = false } = {}) => {
+export async function step(
+  cmd: ShellCommand | ChdirCommand,
+  { comment, autoRun = false }: StepOptions = {}
+): Promise<ProcessOutput | void> {
   if (comment !== undefined) {
     await printComment(comment);
   }
@@ -58,33 +68,20 @@ export const step: Step = async (cmd, { comment, autoRun = false } = {}) => {
 
   console.log("");
   return output;
-};
+}
 
-step.cd = async (dir, { comment, autoRun = false } = {}) => {
-  if (comment !== undefined) {
-    await printComment(comment);
-  }
-  await printCommand(`cd ${$.quote(dir)}`, autoRun);
-  if (!autoRun) {
-    await waitForInput();
-  }
-
-  cd(dir);
-
-  console.log("");
-};
-
-export interface CommandBuilder {
-  (...args: CommandArgs): Command;
+interface Command {
+  get command(): string;
+  run(): ProcessPromise | Promise<void>;
 }
 
 // deno-lint-ignore no-explicit-any
-type CommandArgs = [pieces: TemplateStringsArray, ...args: any[]];
+type ShellCommandArgs = [pieces: TemplateStringsArray, ...args: any[]];
 
-export class Command {
-  #args: CommandArgs;
+export class ShellCommand implements Command {
+  #args: ShellCommandArgs;
 
-  constructor(args: CommandArgs) {
+  constructor(args: ShellCommandArgs) {
     this.#args = args;
   }
 
@@ -102,6 +99,26 @@ export class Command {
   }
 }
 
-export const sh: CommandBuilder = (...args) => {
-  return new Command(args);
-};
+export function sh(...args: ShellCommandArgs): ShellCommand {
+  return new ShellCommand(args);
+}
+
+export class ChdirCommand implements Command {
+  #dir: string;
+
+  constructor(dir: string) {
+    this.#dir = dir;
+  }
+
+  public get command(): string {
+    return `cd ${$.quote(this.#dir)}`;
+  }
+
+  async run(): Promise<void> {
+    await $cd(this.#dir);
+  }
+}
+
+export function cd(dir: string): ChdirCommand {
+  return new ChdirCommand(dir);
+}
